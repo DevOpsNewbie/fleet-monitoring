@@ -91,4 +91,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/rancher/helm-project-operator => ./helm-project-operator
+replace github.com/rancher/helm-project-operator => ./github.com/rancher/helm-project-operator
