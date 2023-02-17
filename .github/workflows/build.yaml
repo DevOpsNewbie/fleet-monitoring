@@ -17,10 +17,8 @@ jobs:
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           export DOCKER_BUILDKIT=1
           docker images
-          echo $VERSION
-          ech "version ist ^^"
-          #docker build -f Dockerfile -t ghcr.io/${{ github.repository_owner }}/${IMAGE}/${IMAGE}:${VERSION}
-          #docker push ghcr.io/${{ github.repository_owner }}/${IMAGE}/${IMAGE}:${VERSION}
+          docker tag rancher/prometheus-federator:${VERSION} ghcr.io/${{ github.repository_owner }}/${IMAGE}/${IMAGE}:${VERSION}
+          docker push ghcr.io/${{ github.repository_owner }}/${IMAGE}/${IMAGE}:${VERSION}
         env:
           IMAGE: prometheus-federator
           TAG: debug
