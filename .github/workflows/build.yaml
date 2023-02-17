@@ -9,13 +9,14 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      - name: Login Build Sign Push
+      - name: Login Build Push
         run: |
           make charts
           make
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           export DOCKER_BUILDKIT=1
+          docker images
           #docker build -f Dockerfile -t ghcr.io/${{ github.repository_owner }}/${IMAGE}/${IMAGE}:${VERSION}
           #docker push ghcr.io/${{ github.repository_owner }}/${IMAGE}/${IMAGE}:${VERSION}
         env:
